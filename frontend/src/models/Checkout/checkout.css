@@ -1,0 +1,73 @@
+/* Page Background */
+.checkout-page {
+  font-family: "Poppins", sans-serif;
+  min-height: 100vh;
+  text-align: center;
+}
+
+
+/* Title */
+.checkout-title {
+  margin-top: 30px;
+  font-size: 32px;
+  color: #7a2c4f;
+}
+
+/* Card */
+.checkout-card {
+  background: linear-gradient(to right, #d4537c, #f8b5c3);
+  width: 400px;
+  margin: 30px auto;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  text-align: left;
+}
+
+/* Inputs */
+.checkout-card label {
+  display: block;
+  margin-top: 15px;
+  font-weight: 600;
+  color: #440a24;
+}
+
+.checkout-card input {
+  width: 90%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #e6a4b4;
+  border-radius: 8px;
+  outline: none;
+}
+
+/* Divider */
+.checkout-card hr {
+  margin: 20px 0;
+  border: none;
+  border-top: 1px solid #ddd;
+}
+
+/* Total */
+.total {
+  text-align: center;
+  color: #7a2c4f;
+}
+
+/* Button */
+.order-btn {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(to right, #ffcdd5, #f07bac);
+  border: none;
+  color: white;
+  font-size: 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 15px;
+  transition: 0.3s;
+}
+
+.order-btn:hover {
+  transform: scale(1.05);
+}
