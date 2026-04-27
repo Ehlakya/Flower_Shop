@@ -47,7 +47,7 @@
 .checkout-btn {
   margin-top: 20px;
   padding: 10px 20px;
-  background: green;
+  background: rgb(176, 79, 164);
   color: white;
   border: none;
   border-radius: 5px;
@@ -58,21 +58,52 @@
   background: darkgreen;
 }
 
-.cart-actions {
+.quantity-controls {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
+  background: #fdf2f8;
+  padding: 5px 12px;
+  border-radius: 25px;
+  border: 1px solid #fbcfe8;
 }
 
-.cart-actions button {
-  background: #ff8fb1;
-  border: none;
-  padding: 5px 10px;
+.quantity-controls button {
+  background: #f472b6;
   color: white;
-  border-radius: 20px;
+  border: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  transition: background 0.2s;
 }
 
-.cart-actions span {
-  font-weight: bold;
+.quantity-controls button:hover {
+  background: #db2777;
+}
+
+.qty-display {
+  font-weight: 700;
+  color: #831843;
+  min-width: 13px;
+  text-align: center;
+}
+
+.remove-btn {
+  background: none !important;
+  color: #be185d !important;
+  font-size: 0.9rem;
+  padding: 0 !important;
+  text-decoration: underline;
+  cursor: pointer;
+  margin-left: auto;
+}
+
+.remove-btn:hover {
+  color: #9d174d !important;
 }

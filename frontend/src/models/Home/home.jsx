@@ -2,6 +2,7 @@ import React from "react";
 import "./home.css";
 import { useNavigate } from "react-router-dom";
 import Occasions from "./Occasions";
+import LatestArrivals from "./LatestArrivals";
 
 const categories = [
   { name: "Flowers", img: "/src/assets/flower 1.jpg", path: "/flowers" },
@@ -36,6 +37,10 @@ function Home() {
           </div>
         ))}
       </div>
+      
+      {/* Dynamic Latest Arrivals Feed */}
+      <LatestArrivals />
+
       <>
         <Occasions />
       </>

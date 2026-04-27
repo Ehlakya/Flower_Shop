@@ -1,17 +1,40 @@
 import React, { useState } from "react";
 import "./signin.css";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 
 const SignIn = () => {
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+  const { login } = useAuth();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log({ email, password });
+    try {
+      const response = await fetch("http://localhost:5000/api/users/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password })
+      });
+      
+      const data = await response.json();
 
-    // 🔥 connect backend here
-    // fetch("/login", {...})
+      if (!response.ok) {
+        alert(data.message || "Invalid credentials");
+        return;
+      }
+
+      login(data.token);
+      
+      // Admins and Users now both land on the Home page by default
+      navigate("/");
+
+    } catch (err) {
+      console.error(err);
+      alert("Server error. Please try again later.");
+    }
   };
 
   return (
@@ -26,8 +49,8 @@ const SignIn = () => {
             <input
               type="text"
               placeholder="Username"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
               required
             />
           </div>
