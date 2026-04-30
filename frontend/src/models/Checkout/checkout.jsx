@@ -74,7 +74,18 @@ const Checkout = () => {
         fetchCart();
     }, [navigate]);
 
-    const handleChange = (e) => { setFormData({ ...formData, [e.target.name]: e.target.value }); };
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        if (name === "phone") {
+            // Only allow digits and max 10 characters
+            const digits = value.replace(/\D/g, "");
+            if (digits.length <= 10) {
+                setFormData({ ...formData, [name]: digits });
+            }
+        } else {
+            setFormData({ ...formData, [name]: value });
+        }
+    };
 
     const detectLocation = () => {
         if (!navigator.geolocation) { alert("Geolocation not supported"); return; }
@@ -101,6 +112,10 @@ const Checkout = () => {
     const handlePlaceOrder = async () => {
         if (!formData.name.trim() || !formData.phone.trim() || !formData.address.trim() || !formData.pincode.trim()) {
             alert("Please fill in all details."); return;
+        }
+        if (formData.phone.length !== 10) {
+            alert("Phone number must be exactly 10 digits.");
+            return;
         }
         if (!paymentMethod) { alert("Select payment method."); return; }
         setIsProcessing(true);

@@ -128,5 +128,5 @@ server.listen(PORT, () => {
 📡 Socket.IO initialized for real-time tracking
   `);
 });
-
-
+// Export for Vercel / Modular use
+module.exports = { app, server };
