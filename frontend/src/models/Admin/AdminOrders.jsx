@@ -21,7 +21,7 @@ function AdminOrders() {
   const fetchOrders = async () => {
     try {
       setLoading(true);
-      const response = await fetch("http://localhost:5000/api/orders/admin/all", {
+      const response = await fetch("/api/orders/admin/all", {
         headers: {
           "Authorization": `Bearer ${localStorage.getItem("token")}`
         }
@@ -50,7 +50,7 @@ function AdminOrders() {
 
   const updateStatus = async (orderId, newStatus) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/orders/${orderId}/status`, {
+      const response = await fetch(`/api/orders/${orderId}/status`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

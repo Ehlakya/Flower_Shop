@@ -33,8 +33,9 @@ import AdminLiveTracker from "./models/Admin/AdminLiveTracker";
 function App() {
   React.useEffect(() => {
     // REQUIREMENT: Every time the page is refreshed, go to the login page.
-    // We check the path to avoid infinite redirect loops if already on signin.
-    if (window.location.pathname !== "/signin") {
+    // Allow /signin, /signup, and /admin-login to persist without redirecting.
+    const publicPaths = ["/signin", "/signup", "/admin-login"];
+    if (!publicPaths.includes(window.location.pathname)) {
       window.location.href = "/signin";
     }
   }, []);

@@ -17,7 +17,7 @@ function ProductDetails() {
   const fetchProduct = async () => {
     try {
       setLoading(true);
-      const response = await fetch(`http://localhost:5000/api/products/${id}`);
+      const response = await fetch(`/api/products/${id}`);
       if (response.ok) {
         const data = await response.json();
         setProduct(data);

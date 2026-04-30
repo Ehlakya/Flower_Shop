@@ -60,7 +60,7 @@ const Checkout = () => {
             const token = localStorage.getItem("token");
             if (!token) { navigate("/signin"); return; }
             try {
-                const response = await fetch("http://localhost:5000/api/cart", {
+                const response = await fetch("/api/cart", {
                     headers: { "Authorization": `Bearer ${token}` }
                 });
                 if (response.ok) {
@@ -113,7 +113,7 @@ const Checkout = () => {
                 latitude: locationCoords?.lat || 11.0168,
                 longitude: locationCoords?.lng || 76.9558
             };
-            const response = await fetch("http://localhost:5000/api/orders", {
+            const response = await fetch("/api/orders", {
                 method: "POST",
                 headers: { "Content-Type": "application/json", "Authorization": `Bearer ${localStorage.getItem("token")}` },
                 body: JSON.stringify(orderPayload)

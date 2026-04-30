@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./signin.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 
 const SignIn = () => {
@@ -13,7 +13,7 @@ const SignIn = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:5000/api/users/login", {
+      const response = await fetch("/api/users/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password })
@@ -69,7 +69,7 @@ const SignIn = () => {
 
           <p>
             Don't have an account?{" "}
-            <a href="/signup">Create an account</a>
+            <Link to="/signup">Create an account</Link>
           </p>
         </form>
       </div>

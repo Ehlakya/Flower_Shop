@@ -1,5 +1,5 @@
-const BASE_URL = "http://localhost:5000/api/products";
-const CART_URL = "http://localhost:5000/api/cart";
+const BASE_URL = "/api/products";
+const CART_URL = "/api/cart";
 
 export const getProducts = async (category = "") => {
   const url = category ? `${BASE_URL}?category=${encodeURIComponent(category)}` : BASE_URL;

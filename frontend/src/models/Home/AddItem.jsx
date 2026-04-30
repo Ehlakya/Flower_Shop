@@ -40,7 +40,7 @@ function AddItem() {
     data.append("image", imageFile);
 
     try {
-      const response = await fetch("http://localhost:5000/api/products", {
+      const response = await fetch("/api/products", {
         method: "POST",
         headers: { 
           // Note: Do NOT set Content-Type header when sending FormData

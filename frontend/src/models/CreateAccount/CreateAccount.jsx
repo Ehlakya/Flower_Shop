@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./CreateAccount.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 
 import cake from "/src/assets/login.png";
@@ -33,7 +33,7 @@ const CreateAccount = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:5000/api/users/register", {
+      const response = await fetch("/api/users/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, username, email, password })
@@ -102,7 +102,7 @@ const CreateAccount = () => {
           <button className="btn">Sign Up</button>
 
           <p>
-            Already have an account? <a href="/signin">Sign in</a>
+            Already have an account? <Link to="/signin">Sign in</Link>
           </p>
 
         </form>
