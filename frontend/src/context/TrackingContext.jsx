@@ -21,15 +21,6 @@ export const TrackingProvider = ({ children }) => {
                     const newLoc = { lat: latitude, lng: longitude };
                     setGlobalLocation(newLoc);
                     setPermissionError(null);
-
-                    if (isBroadcasting) {
-                        // Emit to socket if needed (can be refined per order later)
-                        socket.emit('agentLocationUpdate', {
-                            lat: latitude,
-                            lng: longitude,
-                            timestamp: Date.now()
-                        });
-                    }
                 },
                 (err) => {
                     console.error("Global Geolocation Error:", err);

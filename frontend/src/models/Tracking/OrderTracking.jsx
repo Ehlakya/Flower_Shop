@@ -161,6 +161,7 @@ function OrderTracking() {
                         userId={user?.id} 
                         role="customer" 
                         customerLocation={order?.latitude ? { lat: parseFloat(order.latitude), lng: parseFloat(order.longitude) } : null}
+                        initialAgentLocation={order?.agentLocation}
                         focusLocation={focusLocation}
                         liveTrackingEnabled={order && latestOrderId && order.id.toString() === latestOrderId.toString()}
                         isFollowing={isFollowing}

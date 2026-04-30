@@ -144,7 +144,7 @@ const AdminLiveTracker = () => {
                     <span>{order.customer.name}</span>
                 </div>
                 
-                {isTracking && eta && (
+                {isBroadcasting && eta && (
                     <div className="eta-badge">
                         <strong>Live: {distance}km away</strong>
                         <div style={{fontSize: '0.7rem', opacity: 0.8}}>ETA: ~{eta} mins</div>

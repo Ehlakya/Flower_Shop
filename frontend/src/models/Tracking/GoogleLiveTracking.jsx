@@ -47,17 +47,28 @@ function ChangeView({ center, focusLocation, isFollowing, globalLocation, isGlob
   return null;
 }
 
-const GoogleLiveTracking = ({ orderId, userId, role, customerLocation, focusLocation, liveTrackingEnabled, isFollowing }) => {
+const GoogleLiveTracking = ({ orderId, userId, role, customerLocation, initialAgentLocation, focusLocation, liveTrackingEnabled, isFollowing }) => {
   const { globalLocation, isGlobalFollowing, permissionError } = useTracking();
-  const [currentPos, setCurrentPos] = useState(null);
+  const [currentPos, setCurrentPos] = useState(initialAgentLocation ? [initialAgentLocation.lat, initialAgentLocation.lng] : null);
   const [agentStatus, setAgentStatus] = useState('offline');
   const [route, setRoute] = useState([]);
   const [pathHistory, setPathHistory] = useState([SHOP_LOCATION]); // Path from shop to driver
   const [retryCount, setRetryCount] = useState(0);
 
+  const lastFetchedPosRef = useRef(null);
+  
   // 1. Fetch Route from CURRENT POSITION to DESTINATION
   useEffect(() => {
-    if (customerLocation?.lat && currentPos) {
+    if (customerLocation?.lat && customerLocation?.lng && currentPos) {
+      // Avoid calling OSRM on every tiny movement (only if moved > 0.001 deg ~100m)
+      if (lastFetchedPosRef.current) {
+        const d = Math.sqrt(
+          Math.pow(lastFetchedPosRef.current[0] - currentPos[0], 2) + 
+          Math.pow(lastFetchedPosRef.current[1] - currentPos[1], 2)
+        );
+        if (d < 0.001 && route.length > 0) return;
+      }
+
       const fetchRoute = async () => {
         try {
           const response = await fetch(
@@ -67,6 +78,7 @@ const GoogleLiveTracking = ({ orderId, userId, role, customerLocation, focusLoca
           if (data.routes && data.routes[0]) {
             const coords = data.routes[0].geometry.coordinates.map(coord => [coord[1], coord[0]]);
             setRoute(coords);
+            lastFetchedPosRef.current = currentPos;
             setRetryCount(0); // Reset on success
           }
         } catch (err) {
@@ -81,7 +93,7 @@ const GoogleLiveTracking = ({ orderId, userId, role, customerLocation, focusLoca
       };
       fetchRoute();
     }
-  }, [customerLocation, currentPos, retryCount]);
+  }, [customerLocation, currentPos, retryCount, route.length]);
 
   // 2. Real-time updates via Socket.IO
   useEffect(() => {

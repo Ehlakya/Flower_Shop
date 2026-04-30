@@ -93,6 +93,8 @@ const getUserOrders = async (req, res) => {
         o.created_at,
         o.latitude,
         o.longitude,
+        o.agent_lat,
+        o.agent_lng,
         o.pincode_snapshot,
         oi.quantity, 
         oi.price as item_price,
@@ -119,6 +121,7 @@ const getUserOrders = async (req, res) => {
           created_at, 
           latitude: parseFloat(latitude),
           longitude: parseFloat(longitude),
+          agentLocation: row.agent_lat ? { lat: parseFloat(row.agent_lat), lng: parseFloat(row.agent_lng) } : null,
           pincode_snapshot,
           items: [] 
         };
@@ -152,6 +155,8 @@ const getAllOrdersForAdmin = async (req, res) => {
         o.user_id,
         o.latitude,
         o.longitude,
+        o.agent_lat,
+        o.agent_lng,
         oi.quantity, 
         oi.price as item_price,
         p.name as product_name,
@@ -180,6 +185,7 @@ const getAllOrdersForAdmin = async (req, res) => {
           id: order_id, 
           userId: user_id,
           coords: { lat: parseFloat(latitude), lng: parseFloat(longitude) },
+          agentLocation: row.agent_lat ? { lat: parseFloat(row.agent_lat), lng: parseFloat(row.agent_lng) } : null,
           total, 
           status, 
           payment_method, 

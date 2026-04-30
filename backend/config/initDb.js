@@ -50,10 +50,18 @@ const initDB = async () => {
         payment_method VARCHAR(50),
         latitude NUMERIC(10, 8),
         longitude NUMERIC(11, 8),
+        agent_lat NUMERIC(10, 8),
+        agent_lng NUMERIC(11, 8),
         address_snapshot TEXT,
         pincode_snapshot VARCHAR(20),
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       );
+    `);
+    
+    // Ensure columns exist if table was already created
+    await db.query(`
+      ALTER TABLE orders ADD COLUMN IF NOT EXISTS agent_lat NUMERIC(10, 8);
+      ALTER TABLE orders ADD COLUMN IF NOT EXISTS agent_lng NUMERIC(11, 8);
     `);
     console.log('✅ Orders table ready');
 
